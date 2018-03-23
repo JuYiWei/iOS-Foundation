@@ -1,0 +1,653 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+    
+  NSData - 【iOS - Foundation】说了是村长
+  
+  </title>
+ <meta name="description" content="">
+ <link href="atom.xml" rel="alternate" title="【iOS - Foundation】说了是村长" type="application/atom+xml">
+    <link rel="stylesheet" href="asset/css/foundation.min.css" />
+    <link rel="stylesheet" href="asset/css/docs.css" />
+
+    <script src="asset/js/vendor/modernizr.js"></script>
+    <script src="asset/js/vendor/jquery.js"></script>
+    <script src="asset/highlightjs/highlight.pack.js"></script>
+    <link href="asset/highlightjs/styles/github.css" media="screen, projection" rel="stylesheet" type="text/css">
+    <script>hljs.initHighlightingOnLoad();</script>
+    
+  </head>
+  <body class="antialiased hide-extras">
+    
+    <div class="marketing off-canvas-wrap" data-offcanvas>
+      <div class="inner-wrap">
+
+
+<nav class="top-bar docs-bar hide-for-small" data-topbar>
+
+<div id="header">
+    <h1><a href="index.html">【iOS - Foundation】说了是村长</a></h1>
+</div>
+
+</nav>
+        <nav class="tab-bar show-for-small">
+  <a href="javascript:void(0)" class="left-off-canvas-toggle menu-icon">
+    <span> &nbsp; 【iOS - Foundation】说了是村长</span>
+  </a>
+</nav>
+
+<aside class="left-off-canvas-menu">
+      <ul class="off-canvas-list">
+      <li><a href="index.html">Home</a></li>
+      
+        <li class="divider"></li>
+        <li><label>D</label></li>
+
+          
+            <li><a title="NSDecimal" href="%E3%80%90iOS%20-%20Foundation%E3%80%91NSDecimal.html">NSDecimal</a></li>
+          
+            <li><a title="NSDecimalNumber" href="%E3%80%90iOS%20-%20Foundation%E3%80%91NSDecimalNumber.html">NSDecimalNumber</a></li>
+          
+            <li><a title="NSData" href="%E3%80%90iOS%20-%20Foundation%E3%80%91NSData.html">NSData</a></li>
+          
+
+      
+        <li class="divider"></li>
+        <li><label>N</label></li>
+
+          
+            <li><a title="NSNumber" href="%E3%80%90iOS%20-%20Foundation%E3%80%91NSNumber.html">NSNumber</a></li>
+          
+            <li><a title="NSNumberFormatter" href="%E3%80%90iOS%20-%20Foundation%E3%80%91NSNumberFormatter.html">NSNumberFormatter</a></li>
+          
+
+      
+        <li class="divider"></li>
+        <li><label>M</label></li>
+
+          
+            <li><a title="NSMutableData" href="%E3%80%90iOS%20-%20Foundation%E3%80%91NSMutableData.html">NSMutableData</a></li>
+          
+
+      
+        <li class="divider"></li>
+        <li><label>V</label></li>
+
+          
+            <li><a title="NSValue" href="%E3%80%90iOS%20-%20Foundation%E3%80%91NSValue.html">NSValue</a></li>
+          
+
+      
+        <li class="divider"></li>
+        <li><label>R</label></li>
+
+          
+            <li><a title="NSRange" href="%E3%80%90iOS%20-%20Foundation%E3%80%91NSRange.html">NSRange</a></li>
+          
+
+      
+        <li class="divider"></li>
+        <li><label>U</label></li>
+
+          
+            <li><a title="1.12 NSUUID" href="%E3%80%90iOS%20-%20Foundation%E3%80%91NSUUID.html">1.12 NSUUID</a></li>
+          
+
+      
+        <li class="divider"></li>
+        <li><label>准备中</label></li>
+
+          
+            <li><a title="1.9 NSURL  待" href="15138437158694.html">1.9 NSURL  待</a></li>
+          
+            <li><a title="1.10 NSURLComponents 待" href="15138437157106.html">1.10 NSURLComponents 待</a></li>
+          
+            <li><a title="1.11 NSURLQueryItem 待" href="15138437155644.html">1.11 NSURLQueryItem 待</a></li>
+          
+            <li><a title="2.1 NSString 待" href="15138436818502.html">2.1 NSString 待</a></li>
+          
+            <li><a title="NSScanner 待" href="15217730180026.html">NSScanner 待</a></li>
+          
+            <li><a title="Foundation.h 剩余总览" href="15217711190756.html">Foundation.h 剩余总览</a></li>
+          
+
+      
+      </ul>
+    </aside>
+
+<a class="exit-off-canvas" href="#"></a>
+
+        <section id="main-content" role="main" class="scroll-container">
+
+          <div class="row">
+            <div class="large-3 medium-3 columns">
+              <div class="hide-for-small">
+                <div class="sidebar">
+                <nav>
+                  <ul id="side-nav" class="side-nav">
+
+                    
+                      <li class="side-title"><span>D</span></li>
+                        
+                          <li><a title="NSDecimal" href="%E3%80%90iOS%20-%20Foundation%E3%80%91NSDecimal.html">NSDecimal</a></li>
+                        
+                          <li><a title="NSDecimalNumber" href="%E3%80%90iOS%20-%20Foundation%E3%80%91NSDecimalNumber.html">NSDecimalNumber</a></li>
+                        
+                          <li><a title="NSData" href="%E3%80%90iOS%20-%20Foundation%E3%80%91NSData.html">NSData</a></li>
+                        
+
+                    
+                      <li class="side-title"><span>N</span></li>
+                        
+                          <li><a title="NSNumber" href="%E3%80%90iOS%20-%20Foundation%E3%80%91NSNumber.html">NSNumber</a></li>
+                        
+                          <li><a title="NSNumberFormatter" href="%E3%80%90iOS%20-%20Foundation%E3%80%91NSNumberFormatter.html">NSNumberFormatter</a></li>
+                        
+
+                    
+                      <li class="side-title"><span>M</span></li>
+                        
+                          <li><a title="NSMutableData" href="%E3%80%90iOS%20-%20Foundation%E3%80%91NSMutableData.html">NSMutableData</a></li>
+                        
+
+                    
+                      <li class="side-title"><span>V</span></li>
+                        
+                          <li><a title="NSValue" href="%E3%80%90iOS%20-%20Foundation%E3%80%91NSValue.html">NSValue</a></li>
+                        
+
+                    
+                      <li class="side-title"><span>R</span></li>
+                        
+                          <li><a title="NSRange" href="%E3%80%90iOS%20-%20Foundation%E3%80%91NSRange.html">NSRange</a></li>
+                        
+
+                    
+                      <li class="side-title"><span>U</span></li>
+                        
+                          <li><a title="1.12 NSUUID" href="%E3%80%90iOS%20-%20Foundation%E3%80%91NSUUID.html">1.12 NSUUID</a></li>
+                        
+
+                    
+                      <li class="side-title"><span>准备中</span></li>
+                        
+                          <li><a title="1.9 NSURL  待" href="15138437158694.html">1.9 NSURL  待</a></li>
+                        
+                          <li><a title="1.10 NSURLComponents 待" href="15138437157106.html">1.10 NSURLComponents 待</a></li>
+                        
+                          <li><a title="1.11 NSURLQueryItem 待" href="15138437155644.html">1.11 NSURLQueryItem 待</a></li>
+                        
+                          <li><a title="2.1 NSString 待" href="15138436818502.html">2.1 NSString 待</a></li>
+                        
+                          <li><a title="NSScanner 待" href="15217730180026.html">NSScanner 待</a></li>
+                        
+                          <li><a title="Foundation.h 剩余总览" href="15217711190756.html">Foundation.h 剩余总览</a></li>
+                        
+
+                    
+                  </ul>
+                </nav>
+                </div>
+              </div>
+            </div>
+            <div class="large-9 medium-9 columns">
+
+ <div class="markdown-body">
+<h1>NSData</h1>
+
+<ul>
+<li>
+<a href="#toc_0">初始化</a>
+</li>
+<li>
+<a href="#toc_1">读取文件 data</a>
+</li>
+<li>
+<a href="#toc_2">写入文件</a>
+</li>
+<li>
+<a href="#toc_3">Base64 处理</a>
+</li>
+<li>
+<a href="#toc_4">Bytes 处理</a>
+</li>
+<li>
+<a href="#toc_5">数据查找</a>
+</li>
+<li>
+<a href="#toc_6">其他</a>
+</li>
+</ul>
+
+
+<blockquote>
+<p>NSData : NSObject</p>
+</blockquote>
+
+<h3 id="toc_0">初始化</h3>
+
+<ul>
+<li>准备数据</li>
+</ul>
+
+<pre><code>    int len = 2;
+    Byte *bytes = malloc(sizeof(Byte) * len);
+    bytes[0] = 0x00;
+    bytes[1] = 0x0f;
+    
+    // 栈
+    Byte bytes2[] = {0x01, 0x02};
+</code></pre>
+
+<ul>
+<li>初始化 1</li>
+</ul>
+
+<pre><code>    NSData *data1 = [NSData data];
+</code></pre>
+
+<ul>
+<li>初始化 2</li>
+</ul>
+
+<pre><code>    NSData *data2 = [NSData dataWithBytes:bytes length:2];// bytes free 后 不影响 data2
+    free(bytes1);
+</code></pre>
+
+<ul>
+<li>初始化 3</li>
+</ul>
+
+<pre><code>    NSData *data3 = [NSData dataWithBytesNoCopy:bytes length:2];// bytes free 后 影响 data3
+    free(bytes1);
+</code></pre>
+
+<ul>
+<li>初始化 4</li>
+</ul>
+
+<pre><code>    NSData *data4 = [NSData dataWithBytesNoCopy:bytes length:2 freeWhenDone:YES];// 可以接管 free
+</code></pre>
+
+<ul>
+<li>初始化 5</li>
+</ul>
+
+<pre><code>    NSData *data5 = [NSData dataWithData:data1];
+</code></pre>
+
+<h3 id="toc_1">读取文件 data</h3>
+
+<ul>
+<li>准备本地文件</li>
+</ul>
+
+<pre><code>    NSString *filePath = [[NSBundle mainBundle] pathForResource:@&quot;test&quot; ofType:@&quot;pdf&quot;];
+</code></pre>
+
+<ul>
+<li>无参数模式</li>
+</ul>
+
+<pre><code>    NSData *data = [NSData dataWithContentsOfFile:filePath];
+    NSData *data2 = [NSData dataWithContentsOfURL:[NSURL fileURLWithPath:filePath]];
+</code></pre>
+
+<ul>
+<li>参数模式</li>
+</ul>
+
+<pre><code>    NSError *error;
+    NSData *data3 = [NSData dataWithContentsOfFile:filePath options:NSDataReadingMappedIfSafe error:&amp;error];
+    NSData *data4 = [NSData dataWithContentsOfURL:[NSURL fileURLWithPath:filePath] options:NSDataReadingMappedIfSafe error:&amp;error];
+
+//    typedef NS_OPTIONS(NSUInteger, NSDataReadingOptions) {
+//        NSDataReadingMappedIfSafe =   1UL &lt;&lt; 0,    // 安全的情况下，使用文件映射（不加入内存）
+//        NSDataReadingUncached = 1UL &lt;&lt; 1,    // 加入内存
+//        NSDataReadingMappedAlways = 1UL &lt;&lt; 3,    // 总是不加入内存
+//    };
+</code></pre>
+
+<h3 id="toc_2">写入文件</h3>
+
+<ul>
+<li>准备文件 data</li>
+</ul>
+
+<pre><code>    UIImage *image = [UIImage imageNamed:@&quot;image&quot;];
+    NSData *imageData = UIImagePNGRepresentation(image);
+    NSString *filePath = [NSString stringWithFormat:@&quot;%@/image.png&quot;,NSHomeDirectory()];
+    NSURL *fileUrl = [NSURL fileURLWithPath:filePath];
+</code></pre>
+
+<ul>
+<li>一般</li>
+</ul>
+
+<pre><code>    BOOL res1 = [imageData writeToFile:filePath atomically:NO];
+    BOOL res2 = [imageData writeToURL:fileUrl atomically:YES];
+</code></pre>
+
+<ul>
+<li>复杂</li>
+</ul>
+
+<pre><code>    NSError *error;
+    BOOL res3 = [imageData writeToFile:filePath options:NSDataWritingAtomic error:&amp;error];
+    BOOL res4 = [imageData writeToURL:fileUrl options:NSDataWritingWithoutOverwriting error:&amp;error];
+
+//    typedef NS_OPTIONS(NSUInteger, NSDataWritingOptions) {
+//        NSDataWritingAtomic = 1UL &lt;&lt; 0, // 覆盖
+//        NSDataWritingWithoutOverwriting = 1UL &lt;&lt; 1, // 不覆盖，已存在时，返回 NO
+//        NSDataWritingFileProtectionNone = 0x10000000, // 以下都是 文件保护 相关
+//        NSDataWritingFileProtectionComplete = 0x20000000,
+//        NSDataWritingFileProtectionCompleteUnlessOpen = 0x30000000,
+//        NSDataWritingFileProtectionCompleteUntilFirstUserAuthentication = 0x40000000,
+//        NSDataWritingFileProtectionMask = 0xf0000000,
+//    };
+</code></pre>
+
+<h3 id="toc_3">Base64 处理</h3>
+
+<ul>
+<li>准备 data</li>
+</ul>
+
+<pre><code>    Byte bytes[] = {
+        0x01, 0x02, 0x03, 0x04, 0x01, 0x02, 0x03, 0x04,
+        0x01, 0x02, 0x03, 0x04, 0x01, 0x02, 0x03, 0x04,
+        
+        0x01, 0x02, 0x03, 0x04, 0x01, 0x02, 0x03, 0x04,
+        0x01, 0x02, 0x03, 0x04, 0x01, 0x02, 0x03, 0x04,
+        
+        0x01, 0x02, 0x03, 0x04, 0x01, 0x02, 0x03, 0x04,
+        0x01, 0x02, 0x03, 0x04, 0x01, 0x02, 0x03, 0x04,
+        
+        0x01, 0x02, 0x03, 0x04, 0x01, 0x02, 0x03, 0x04,
+        0x01, 0x02, 0x03, 0x04, 0x01, 0x02, 0x03, 0x04,
+
+        0x01, 0x02, 0x03, 0x04, 0x01, 0x02, 0x03, 0x04,
+        0x01, 0x02, 0x03, 0x04, 0x01, 0x02, 0x03, 0x04,
+
+        0x01, 0x02, 0x03, 0x04, 0x01, 0x02, 0x03, 0x04,
+        0x01, 0x02, 0x03, 0x04, 0x01, 0x02, 0x03, 0x04
+    };
+    NSData *data = [NSData dataWithBytes:bytes length:96];
+</code></pre>
+
+<ul>
+<li>data &lt;-&gt; base64String</li>
+</ul>
+
+<pre><code>    NSString *base64String1 = [data base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
+
+//    typedef NS_OPTIONS(NSUInteger, NSDataBase64EncodingOptions) {
+//        2 选 1，64\76 长度分割
+//        NSDataBase64Encoding64CharacterLineLength = 1UL &lt;&lt; 0,
+//        NSDataBase64Encoding76CharacterLineLength = 1UL &lt;&lt; 1,
+//
+//        下面 2 个参数，默认都有，也就是默认添加 \r\n
+//        NSDataBase64EncodingEndLineWithCarriageReturn = 1UL &lt;&lt; 4, // 添加 \r
+//        NSDataBase64EncodingEndLineWithLineFeed = 1UL &lt;&lt; 5,// 添加 \n
+//    }
+
+
+    NSData *data1 = [[NSData alloc] initWithBase64EncodedString:base64String1 options:NSDataBase64DecodingIgnoreUnknownCharacters];
+
+//    typedef NS_OPTIONS(NSUInteger, NSDataBase64DecodingOptions) {
+//        NSDataBase64DecodingIgnoreUnknownCharacters = 1UL &lt;&lt; 0// 没的选，自动识别了
+//    }
+</code></pre>
+
+<ul>
+<li>data &lt;-&gt; base64data</li>
+</ul>
+
+<pre><code>    // 与 string 转换类似
+    NSData *base64Data = [data base64EncodedDataWithOptions:NSDataBase64Encoding64CharacterLineLength];
+    NSData *data5 = [[NSData alloc] initWithBase64EncodedData:base64Data options:NSDataBase64DecodingIgnoreUnknownCharacters];
+</code></pre>
+
+<h3 id="toc_4">Bytes 处理</h3>
+
+<ul>
+<li>准备数据</li>
+</ul>
+
+<pre><code>    int len = 10;
+    Byte *bytes1 = malloc(sizeof(Byte) * len);
+    bytes1[0] = 0x00;
+    bytes1[1] = 0x01;
+    bytes1[2] = 0x02;
+    bytes1[3] = 0x03;
+    bytes1[4] = 0x04;
+    bytes1[5] = 0x05;
+    bytes1[6] = 0x06;
+    bytes1[7] = 0x07;
+    bytes1[8] = 0x08;
+    bytes1[9] = 0x09;
+    NSData *data = [NSData dataWithBytes:bytes1 length:len];
+</code></pre>
+
+<ul>
+<li>获取完整 bytes[]</li>
+</ul>
+
+<pre><code>    Byte *dataBytes = (Byte *)data.bytes;
+    NSString *newHexStr = [NSString stringWithFormat:@&quot;%x&quot;,dataBytes[1]&amp;0xff];///16进制数
+    NSLog(@&quot;%@&quot;, newHexStr);
+</code></pre>
+
+<ul>
+<li>获取部分 bytes[]</li>
+</ul>
+
+<pre><code>    Byte *subBytes1 = malloc(sizeof(Byte) * 10);
+    [data getBytes:subBytes1 length:10];
+    NSLog(@&quot;%@&quot;, [NSData dataWithBytes:subBytes1 length:10]);
+    
+    Byte *subBytes2 = malloc(sizeof(Byte) * 3);
+    [data getBytes:subBytes2 range:NSMakeRange(2, 3)];
+    NSLog(@&quot;%@&quot;, [NSData dataWithBytes:subBytes2 length:3]);
+
+</code></pre>
+
+<ul>
+<li>遍历（简单测试发现，byteRange 就是完整 data，拼接的复杂 data 会遍历出来？暂时不清楚）</li>
+</ul>
+
+<pre><code>    [data enumerateByteRangesUsingBlock:^(const void * _Nonnull bytes, NSRange byteRange, BOOL * _Nonnull stop) {
+        NSLog(@&quot;%@&quot;, NSStringFromRange(byteRange));
+        NSLog(@&quot;%s&quot;, bytes);
+    }];
+</code></pre>
+
+<h3 id="toc_5">数据查找</h3>
+
+<ul>
+<li>准备数据</li>
+</ul>
+
+<pre><code>    int len1 = 20;
+    Byte *bytes1 = malloc(sizeof(Byte) * len1);
+    bytes1[0] = 0x00;
+    bytes1[1] = 0x01;
+    bytes1[2] = 0x02;
+    bytes1[3] = 0x03;
+    bytes1[4] = 0x04;
+    bytes1[5] = 0x05;
+    bytes1[6] = 0x06;
+    bytes1[7] = 0x07;
+    bytes1[8] = 0x08;
+    bytes1[9] = 0x09;
+    bytes1[10] = 0x00;
+    bytes1[11] = 0x01;
+    bytes1[12] = 0x02;
+    bytes1[13] = 0x03;
+    bytes1[14] = 0x04;
+    bytes1[15] = 0x05;
+    bytes1[16] = 0x06;
+    bytes1[17] = 0x07;
+    bytes1[18] = 0x08;
+    bytes1[19] = 0x09;
+    
+    NSData *data1 = [NSData dataWithBytes:bytes1 length:len1];
+</code></pre>
+
+<ul>
+<li>获取部分数据</li>
+</ul>
+
+<pre><code>    NSData *subData = [data1 subdataWithRange:NSMakeRange(2, 3)];
+</code></pre>
+
+<ul>
+<li>查找部分数据的范围（可选条件）</li>
+</ul>
+
+<pre><code>//    typedef NS_OPTIONS(NSUInteger, NSDataSearchOptions) {
+//        NSDataSearchBackwards = 1UL &lt;&lt; 0, // 倒序
+//        NSDataSearchAnchored = 1UL &lt;&lt; 1 // 类似前缀（结合倒序用就是后缀）
+//    }
+</code></pre>
+
+<ul>
+<li>正向查找</li>
+</ul>
+
+<pre><code>    int len2 = 3;
+    Byte *bytes2 = malloc(sizeof(Byte) * len2);
+    bytes2[0] = 0x01;
+    bytes2[1] = 0x02;
+    bytes2[2] = 0x03;
+    NSData *data2 = [NSData dataWithBytes:bytes2 length:len2];
+
+    NSRange range2 = [data1 rangeOfData:data2 options:0 range:NSMakeRange(0, 20)];
+</code></pre>
+
+<ul>
+<li>反向查找</li>
+</ul>
+
+<pre><code>    int len3 = 3;
+    Byte *bytes3 = malloc(sizeof(Byte) * len3);
+    bytes3[0] = 0x06;
+    bytes3[1] = 0x07;
+    bytes3[2] = 0x08;
+    NSData *data3 = [NSData dataWithBytes:bytes3 length:len3];
+    
+    NSRange range3 = [data1 rangeOfData:data3 options:NSDataSearchBackwards range:NSMakeRange(0, 20)];
+</code></pre>
+
+<ul>
+<li>前缀</li>
+</ul>
+
+<pre><code>    int len4 = 3;
+    Byte *bytes4 = malloc(sizeof(Byte) * len4);
+    bytes4[0] = 0x01;
+    bytes4[1] = 0x02;
+    bytes4[2] = 0x03;
+    NSData *data4 = [NSData dataWithBytes:bytes4 length:len4];
+
+    NSRange range4 = [data1 rangeOfData:data4 options:NSDataSearchAnchored range:NSMakeRange(1, 19)];
+</code></pre>
+
+<ul>
+<li>后缀</li>
+</ul>
+
+<pre><code>    int len5 = 3;
+    Byte *bytes5 = malloc(sizeof(Byte) * len5);
+    bytes5[0] = 0x06;
+    bytes5[1] = 0x07;
+    bytes5[2] = 0x08;
+    NSData *data5 = [NSData dataWithBytes:bytes5 length:len5];
+    
+    NSRange range5 = [data1 rangeOfData:data5 options:NSDataSearchAnchored | NSDataSearchBackwards range:NSMakeRange(0, 19)];
+</code></pre>
+
+<h3 id="toc_6">其他</h3>
+
+<pre><code>    BOOL iseq = [data1 isEqualToData:data2];
+    NSInteger len = data1.length;
+    NSString *desc = data1.description;
+</code></pre>
+
+
+</div>
+
+<br /><br />
+<hr />
+
+<div class="row clearfix">
+  <div class="large-6 columns">
+	<div class="text-left" style="padding:15px 0px;">
+		
+	        <a href="%E3%80%90iOS%20-%20Foundation%E3%80%91NSNumberFormatter.html"  title="Previous Post: NSNumberFormatter">&laquo; NSNumberFormatter</a>
+	    
+	</div>
+  </div>
+  <div class="large-6 columns">
+	<div class="text-right" style="padding:15px 0px;">
+		
+	        <a href="%E3%80%90iOS%20-%20Foundation%E3%80%91NSMutableData.html" 
+	        title="Next Post: NSMutableData">NSMutableData &raquo;</a>
+	    
+	</div>
+  </div>
+</div>
+
+<div class="row">
+<div style="padding:0px 0.93em;" class="share-comments">
+
+</div>
+</div>
+<script type="text/javascript">
+	$(function(){
+		var currentURL = '%E3%80%90iOS%20-%20Foundation%E3%80%91NSData.html';
+		$('#side-nav a').each(function(){
+			if($(this).attr('href') == currentURL){
+				$(this).parent().addClass('active');
+			}
+		});
+	});
+</script>  
+</div></div>
+
+
+<div class="page-bottom">
+  <div class="row">
+  <hr />
+  <div class="small-9 columns">
+  <p class="copyright">Copyright &copy; 2015
+Powered by <a target="_blank" href="http://www.mweb.im">MWeb</a>,&nbsp; 
+Theme used <a target="_blank" href="http://github.com">GitHub CSS</a>.</p>
+  </div>
+  <div class="small-3 columns">
+  <p class="copyright text-right"><a href="#header">TOP</a></p>
+  </div>
+   
+  </div>
+</div>
+
+        </section>
+      </div>
+    </div>
+    
+    
+    <script src="asset/js/foundation.min.js"></script>
+    <script src="asset/js/foundation/foundation.offcanvas.js"></script>
+    <script>
+      $(document).foundation();
+
+     
+    </script>
+    
+
+
+  </body>
+</html>

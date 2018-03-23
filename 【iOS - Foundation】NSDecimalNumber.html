@@ -1,0 +1,507 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+    
+  NSDecimalNumber - 【iOS - Foundation】说了是村长
+  
+  </title>
+ <meta name="description" content="">
+ <link href="atom.xml" rel="alternate" title="【iOS - Foundation】说了是村长" type="application/atom+xml">
+    <link rel="stylesheet" href="asset/css/foundation.min.css" />
+    <link rel="stylesheet" href="asset/css/docs.css" />
+
+    <script src="asset/js/vendor/modernizr.js"></script>
+    <script src="asset/js/vendor/jquery.js"></script>
+    <script src="asset/highlightjs/highlight.pack.js"></script>
+    <link href="asset/highlightjs/styles/github.css" media="screen, projection" rel="stylesheet" type="text/css">
+    <script>hljs.initHighlightingOnLoad();</script>
+    
+  </head>
+  <body class="antialiased hide-extras">
+    
+    <div class="marketing off-canvas-wrap" data-offcanvas>
+      <div class="inner-wrap">
+
+
+<nav class="top-bar docs-bar hide-for-small" data-topbar>
+
+<div id="header">
+    <h1><a href="index.html">【iOS - Foundation】说了是村长</a></h1>
+</div>
+
+</nav>
+        <nav class="tab-bar show-for-small">
+  <a href="javascript:void(0)" class="left-off-canvas-toggle menu-icon">
+    <span> &nbsp; 【iOS - Foundation】说了是村长</span>
+  </a>
+</nav>
+
+<aside class="left-off-canvas-menu">
+      <ul class="off-canvas-list">
+      <li><a href="index.html">Home</a></li>
+      
+        <li class="divider"></li>
+        <li><label>D</label></li>
+
+          
+            <li><a title="NSDecimal" href="%E3%80%90iOS%20-%20Foundation%E3%80%91NSDecimal.html">NSDecimal</a></li>
+          
+            <li><a title="NSDecimalNumber" href="%E3%80%90iOS%20-%20Foundation%E3%80%91NSDecimalNumber.html">NSDecimalNumber</a></li>
+          
+            <li><a title="NSData" href="%E3%80%90iOS%20-%20Foundation%E3%80%91NSData.html">NSData</a></li>
+          
+
+      
+        <li class="divider"></li>
+        <li><label>N</label></li>
+
+          
+            <li><a title="NSNumber" href="%E3%80%90iOS%20-%20Foundation%E3%80%91NSNumber.html">NSNumber</a></li>
+          
+            <li><a title="NSNumberFormatter" href="%E3%80%90iOS%20-%20Foundation%E3%80%91NSNumberFormatter.html">NSNumberFormatter</a></li>
+          
+
+      
+        <li class="divider"></li>
+        <li><label>M</label></li>
+
+          
+            <li><a title="NSMutableData" href="%E3%80%90iOS%20-%20Foundation%E3%80%91NSMutableData.html">NSMutableData</a></li>
+          
+
+      
+        <li class="divider"></li>
+        <li><label>V</label></li>
+
+          
+            <li><a title="NSValue" href="%E3%80%90iOS%20-%20Foundation%E3%80%91NSValue.html">NSValue</a></li>
+          
+
+      
+        <li class="divider"></li>
+        <li><label>R</label></li>
+
+          
+            <li><a title="NSRange" href="%E3%80%90iOS%20-%20Foundation%E3%80%91NSRange.html">NSRange</a></li>
+          
+
+      
+        <li class="divider"></li>
+        <li><label>U</label></li>
+
+          
+            <li><a title="1.12 NSUUID" href="%E3%80%90iOS%20-%20Foundation%E3%80%91NSUUID.html">1.12 NSUUID</a></li>
+          
+
+      
+        <li class="divider"></li>
+        <li><label>准备中</label></li>
+
+          
+            <li><a title="1.9 NSURL  待" href="15138437158694.html">1.9 NSURL  待</a></li>
+          
+            <li><a title="1.10 NSURLComponents 待" href="15138437157106.html">1.10 NSURLComponents 待</a></li>
+          
+            <li><a title="1.11 NSURLQueryItem 待" href="15138437155644.html">1.11 NSURLQueryItem 待</a></li>
+          
+            <li><a title="2.1 NSString 待" href="15138436818502.html">2.1 NSString 待</a></li>
+          
+            <li><a title="NSScanner 待" href="15217730180026.html">NSScanner 待</a></li>
+          
+            <li><a title="Foundation.h 剩余总览" href="15217711190756.html">Foundation.h 剩余总览</a></li>
+          
+
+      
+      </ul>
+    </aside>
+
+<a class="exit-off-canvas" href="#"></a>
+
+        <section id="main-content" role="main" class="scroll-container">
+
+          <div class="row">
+            <div class="large-3 medium-3 columns">
+              <div class="hide-for-small">
+                <div class="sidebar">
+                <nav>
+                  <ul id="side-nav" class="side-nav">
+
+                    
+                      <li class="side-title"><span>D</span></li>
+                        
+                          <li><a title="NSDecimal" href="%E3%80%90iOS%20-%20Foundation%E3%80%91NSDecimal.html">NSDecimal</a></li>
+                        
+                          <li><a title="NSDecimalNumber" href="%E3%80%90iOS%20-%20Foundation%E3%80%91NSDecimalNumber.html">NSDecimalNumber</a></li>
+                        
+                          <li><a title="NSData" href="%E3%80%90iOS%20-%20Foundation%E3%80%91NSData.html">NSData</a></li>
+                        
+
+                    
+                      <li class="side-title"><span>N</span></li>
+                        
+                          <li><a title="NSNumber" href="%E3%80%90iOS%20-%20Foundation%E3%80%91NSNumber.html">NSNumber</a></li>
+                        
+                          <li><a title="NSNumberFormatter" href="%E3%80%90iOS%20-%20Foundation%E3%80%91NSNumberFormatter.html">NSNumberFormatter</a></li>
+                        
+
+                    
+                      <li class="side-title"><span>M</span></li>
+                        
+                          <li><a title="NSMutableData" href="%E3%80%90iOS%20-%20Foundation%E3%80%91NSMutableData.html">NSMutableData</a></li>
+                        
+
+                    
+                      <li class="side-title"><span>V</span></li>
+                        
+                          <li><a title="NSValue" href="%E3%80%90iOS%20-%20Foundation%E3%80%91NSValue.html">NSValue</a></li>
+                        
+
+                    
+                      <li class="side-title"><span>R</span></li>
+                        
+                          <li><a title="NSRange" href="%E3%80%90iOS%20-%20Foundation%E3%80%91NSRange.html">NSRange</a></li>
+                        
+
+                    
+                      <li class="side-title"><span>U</span></li>
+                        
+                          <li><a title="1.12 NSUUID" href="%E3%80%90iOS%20-%20Foundation%E3%80%91NSUUID.html">1.12 NSUUID</a></li>
+                        
+
+                    
+                      <li class="side-title"><span>准备中</span></li>
+                        
+                          <li><a title="1.9 NSURL  待" href="15138437158694.html">1.9 NSURL  待</a></li>
+                        
+                          <li><a title="1.10 NSURLComponents 待" href="15138437157106.html">1.10 NSURLComponents 待</a></li>
+                        
+                          <li><a title="1.11 NSURLQueryItem 待" href="15138437155644.html">1.11 NSURLQueryItem 待</a></li>
+                        
+                          <li><a title="2.1 NSString 待" href="15138436818502.html">2.1 NSString 待</a></li>
+                        
+                          <li><a title="NSScanner 待" href="15217730180026.html">NSScanner 待</a></li>
+                        
+                          <li><a title="Foundation.h 剩余总览" href="15217711190756.html">Foundation.h 剩余总览</a></li>
+                        
+
+                    
+                  </ul>
+                </nav>
+                </div>
+              </div>
+            </div>
+            <div class="large-9 medium-9 columns">
+
+ <div class="markdown-body">
+<h1>NSDecimalNumber</h1>
+
+<ul>
+<li>
+<a href="#toc_0">创建</a>
+</li>
+<li>
+<a href="#toc_1">计算</a>
+</li>
+<li>
+<a href="#toc_2">舍入方式</a>
+</li>
+<li>
+<a href="#toc_3">舍入处理</a>
+<ul>
+<li>
+<a href="#toc_4">代理 NSDecimalNumberBehaviors</a>
+</li>
+<li>
+<a href="#toc_5">系统提供默认</a>
+</li>
+<li>
+<a href="#toc_6">系统提供代理类 NSDecimalNumberHandler 处理</a>
+</li>
+</ul>
+</li>
+<li>
+<a href="#toc_7">数据转换</a>
+</li>
+<li>
+<a href="#toc_8">比较</a>
+</li>
+<li>
+<a href="#toc_9">异常常量</a>
+</li>
+</ul>
+
+
+<blockquote>
+<p>NSDecimalNumber : NSNumber</p>
+</blockquote>
+
+<h3 id="toc_0">创建</h3>
+
+<pre><code>    NSDecimal decimal;
+    NSDecimalNumber *decimalNumber = [NSDecimalNumber decimalNumberWithDecimal:decimal];
+    NSDecimalNumber *decimalNumber1 = [NSDecimalNumber decimalNumberWithMantissa:12345 exponent:-4 isNegative:YES];
+    NSDecimalNumber *decimalNumber2 = [NSDecimalNumber decimalNumberWithString:@&quot;-1.2345&quot;];
+    NSDecimalNumber *decimalNumber3 = [NSDecimalNumber decimalNumberWithString:@&quot;-1.2345&quot; locale:nil];
+    // 对应的 实例化初始化，略；
+    
+    // 默认值
+    NSLog(@&quot;zero:%@&quot;, [NSDecimalNumber zero]);
+    NSLog(@&quot;one:%@&quot;, [NSDecimalNumber one]);
+    NSLog(@&quot;minimumDecimalNumber:%@&quot;, [NSDecimalNumber minimumDecimalNumber]);
+    NSLog(@&quot;maximumDecimalNumber:%@&quot;, [NSDecimalNumber maximumDecimalNumber]);
+    NSLog(@&quot;notANumber:%@&quot;, [NSDecimalNumber notANumber]);
+</code></pre>
+
+<h3 id="toc_1">计算</h3>
+
+<ul>
+<li>decimalNumberA + decimalNumberB</li>
+</ul>
+
+<pre><code>    decimalNumber = [decimalNumber1 decimalNumberByAdding:decimalNumber2];
+    NSLog(@&quot;add:%@&quot;,decimalNumber);
+    
+    // 指定代理，舍入模式选择
+    decimalNumber = [decimalNumber1 decimalNumberByAdding:decimalNumber2 withBehavior:self];
+    NSLog(@&quot;add 2:%@&quot;,decimalNumber1);
+</code></pre>
+
+<ul>
+<li>decimalNumberA - decimalNumberB</li>
+</ul>
+
+<pre><code>    decimalNumber = [decimalNumber1 decimalNumberBySubtracting:decimalNumber2];
+    decimalNumber = [decimalNumber1 decimalNumberBySubtracting:decimalNumber2 withBehavior:self];
+</code></pre>
+
+<ul>
+<li>decimalNumberA * decimalNumberB</li>
+</ul>
+
+<pre><code>    decimalNumber = [decimalNumber1 decimalNumberByMultiplyingBy:decimalNumber2];
+    decimalNumber = [decimalNumber1 decimalNumberByMultiplyingBy:decimalNumber2 withBehavior:self];    
+</code></pre>
+
+<ul>
+<li>decimalNumberA / decimalNumberB</li>
+</ul>
+
+<pre><code>    decimalNumber = [decimalNumber1 decimalNumberByDividingBy:decimalNumber2];
+    decimalNumber = [decimalNumber1 decimalNumberByMultiplyingBy:decimalNumber2 withBehavior:self];
+</code></pre>
+
+<ul>
+<li>decimalNumberA ^ uintB</li>
+</ul>
+
+<pre><code>    decimalNumber = [decimalNumber1 decimalNumberByRaisingToPower:2];
+    decimalNumber = [decimalNumber1 decimalNumberByRaisingToPower:2 withBehavior:self];
+</code></pre>
+
+<ul>
+<li>decimalNumberA * 10 ^ shortB</li>
+</ul>
+
+<pre><code>    decimalNumber = [decimalNumber1 decimalNumberByMultiplyingByPowerOf10:2];
+    decimalNumber = [decimalNumber1 decimalNumberByMultiplyingByPowerOf10:2 withBehavior:self];
+</code></pre>
+
+<h3 id="toc_2">舍入方式</h3>
+
+<ul>
+<li>自身舍入</li>
+</ul>
+
+<pre><code>    decimalNumber = [decimalNumber decimalNumberByRoundingAccordingToBehavior:self];
+</code></pre>
+
+<ul>
+<li>计算舍入</li>
+</ul>
+
+<pre><code>    decimalNumber = [decimalNumber1 decimalNumberByAdding:decimalNumber2 withBehavior:self];
+</code></pre>
+
+<h3 id="toc_3">舍入处理</h3>
+
+<h4 id="toc_4">代理 NSDecimalNumberBehaviors</h4>
+
+<pre><code>{
+    decimalNumber = [decimalNumber decimalNumberByRoundingAccordingToBehavior:self];
+}
+
+#pragma mark - NSDecimalNumberBehaviors
+
+// 舍入方式
+- (NSRoundingMode)roundingMode {
+    return NSRoundBankers;
+}
+
+// 保留小数位数
+- (short)scale {
+    return 2;
+}
+
+// 舍入结果异常处理：
+- (nullable NSDecimalNumber *)exceptionDuringOperation:(SEL)operation error:(NSCalculationError)error leftOperand:(NSDecimalNumber *)leftOperand rightOperand:(nullable NSDecimalNumber *)rightOperand {
+    NSLog(@&quot;leftOperand:%@&quot;, leftOperand);
+    NSLog(@&quot;rightOperand:%@&quot;, rightOperand);
+    switch (error) {
+        case NSCalculationNoError: {
+            return rightOperand;
+        }
+            break;
+        case NSCalculationLossOfPrecision:{
+            return rightOperand;
+        }
+            break;
+        case NSCalculationUnderflow:{
+            return [NSDecimalNumber minimumDecimalNumber];
+        }
+            break;
+        case NSCalculationOverflow:{
+            return [NSDecimalNumber maximumDecimalNumber];
+        }
+            break;
+        case NSCalculationDivideByZero:{
+            return [NSDecimalNumber notANumber];
+        }
+            break;
+    }
+}
+</code></pre>
+
+<h4 id="toc_5">系统提供默认</h4>
+
+<pre><code>    //[NSDecimalNumber defaultBehavior]
+    decimalNumber = [decimalNumber decimalNumberByRoundingAccordingToBehavior:[NSDecimalNumber defaultBehavior]];
+
+    //[NSDecimalNumberHandler defaultDecimalNumberHandler]
+    decimalNumber = [decimalNumber decimalNumberByRoundingAccordingToBehavior:[NSDecimalNumberHandler defaultDecimalNumberHandler]];
+</code></pre>
+
+<h4 id="toc_6">系统提供代理类 NSDecimalNumberHandler 处理</h4>
+
+<pre><code>    NSDecimalNumberHandler *handler = [NSDecimalNumberHandler decimalNumberHandlerWithRoundingMode:NSRoundBankers scale:2 raiseOnExactness:YES raiseOnOverflow:YES raiseOnUnderflow:YES raiseOnDivideByZero:YES];
+    decimalNumber = [decimalNumber decimalNumberByRoundingAccordingToBehavior:handler];
+</code></pre>
+
+<blockquote>
+<p>注：使用代理类处理时 NSException 指定的几个参数为 YES 时，错误时会抛出异常，需要自己处理</p>
+</blockquote>
+
+<pre><code>// 我们使用，除以 0 来做示例
+    @try {
+        decimalNumber = [decimalNumber decimalNumberByDividingBy:[NSDecimalNumber zero] withBehavior:handler];
+
+    }
+    @catch (NSException *exception) {
+        if ([exception.name isEqualToString:NSDecimalNumberDivideByZeroException]) {
+            NSLog(@&quot;除数为 0！&quot;);
+        }
+    }
+    @finally {
+        // 结果处理
+        decimalNumber = [NSDecimalNumber decimalNumberWithString:@&quot;999&quot;];
+    }
+    NSLog(@&quot;%@&quot;,[decimalNumber descriptionWithLocale:nil]);
+</code></pre>
+
+<h3 id="toc_7">数据转换</h3>
+
+<pre><code>    NSDecimal decimalValue = decimalNumber1.decimalValue;
+    double doubleValue = decimalNumber1.doubleValue;
+    NSString *decimalString = [decimalNumber1 descriptionWithLocale:nil];
+    const char *decimalChar = decimalNumber1.objCType;
+</code></pre>
+
+<h3 id="toc_8">比较</h3>
+
+<pre><code>    NSComparisonResult *res = [num1 compare:num2];
+</code></pre>
+
+<h3 id="toc_9">异常常量</h3>
+
+<pre><code>FOUNDATION_EXPORT NSExceptionName const NSDecimalNumberExactnessException;    // 丢失精度
+FOUNDATION_EXPORT NSExceptionName const NSDecimalNumberOverflowException;     // 向上溢出
+FOUNDATION_EXPORT NSExceptionName const NSDecimalNumberUnderflowException;    // 向下溢出
+FOUNDATION_EXPORT NSExceptionName const NSDecimalNumberDivideByZeroException; // 除数为 0
+</code></pre>
+
+
+</div>
+
+<br /><br />
+<hr />
+
+<div class="row clearfix">
+  <div class="large-6 columns">
+	<div class="text-left" style="padding:15px 0px;">
+		
+	        <a href="%E3%80%90iOS%20-%20Foundation%E3%80%91NSDecimal.html"  title="Previous Post: NSDecimal">&laquo; NSDecimal</a>
+	    
+	</div>
+  </div>
+  <div class="large-6 columns">
+	<div class="text-right" style="padding:15px 0px;">
+		
+	        <a href="15138437158694.html" 
+	        title="Next Post: 1.9 NSURL  待">1.9 NSURL  待 &raquo;</a>
+	    
+	</div>
+  </div>
+</div>
+
+<div class="row">
+<div style="padding:0px 0.93em;" class="share-comments">
+
+</div>
+</div>
+<script type="text/javascript">
+	$(function(){
+		var currentURL = '%E3%80%90iOS%20-%20Foundation%E3%80%91NSDecimalNumber.html';
+		$('#side-nav a').each(function(){
+			if($(this).attr('href') == currentURL){
+				$(this).parent().addClass('active');
+			}
+		});
+	});
+</script>  
+</div></div>
+
+
+<div class="page-bottom">
+  <div class="row">
+  <hr />
+  <div class="small-9 columns">
+  <p class="copyright">Copyright &copy; 2015
+Powered by <a target="_blank" href="http://www.mweb.im">MWeb</a>,&nbsp; 
+Theme used <a target="_blank" href="http://github.com">GitHub CSS</a>.</p>
+  </div>
+  <div class="small-3 columns">
+  <p class="copyright text-right"><a href="#header">TOP</a></p>
+  </div>
+   
+  </div>
+</div>
+
+        </section>
+      </div>
+    </div>
+    
+    
+    <script src="asset/js/foundation.min.js"></script>
+    <script src="asset/js/foundation/foundation.offcanvas.js"></script>
+    <script>
+      $(document).foundation();
+
+     
+    </script>
+    
+
+
+  </body>
+</html>
