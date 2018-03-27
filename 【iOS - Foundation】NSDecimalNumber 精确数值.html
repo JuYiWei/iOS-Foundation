@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>
     
-  准备中 - 【iOS - Foundation】居然是村长
+  NSDecimalNumber 精确数值 - 【iOS - Foundation】居然是村长
   
   </title>
  <meta name="description" content="">
@@ -199,121 +199,281 @@
             </div>
             <div class="large-9 medium-9 columns">
 
- 
-
-
-	
-		<div class="markdown-body">
-		<h1>NSScanner 字符串扫描机</h1>
-
-		<blockquote>
-<p>NSScanner : NSObject</p>
-</blockquote>
-
-<h3 id="toc_0">扫描机基本配置</h3>
-
-<pre><code>    // 初始化
-    NSScanner *scanner = [NSScanner scannerWithString:@&quot;abc DEF 123 啊啊啊 0x22&quot;];
-
-    // 字符
-    NSString *scannerString = scanner.string;
-    
-    // 开始位置
-    scanner.scanLocation = 2;
-    
-    // 过滤字符
-    scanner.charactersToBeSkipped = [NSCharacterSet lowercaseLetterCharacterSet];
-    
-    // 不忽略大小写，默认是 NO，忽略大小写的
-    scanner.caseSensitive = YES;
-    
-    // 本地化
-    scanner.locale = [[NSLocale alloc] initWithLocaleIdentifier: NSCalendarIdentifierGregorian];
-</code></pre>
-
-<blockquote>
-<p>注意过滤字符，与大小写的配置，会影响下面的扫描</p>
-</blockquote>
-
-<h3 id="toc_1">拓展 NSExtendedScanner</h3>
+ <div class="markdown-body">
+<h1>NSDecimalNumber 精确数值</h1>
 
 <ul>
-<li>完整扫描</li>
+<li>
+<a href="#toc_0">创建</a>
+</li>
+<li>
+<a href="#toc_1">计算</a>
+</li>
+<li>
+<a href="#toc_2">舍入方式</a>
+</li>
+<li>
+<a href="#toc_3">舍入处理</a>
+<ul>
+<li>
+<a href="#toc_4">代理 NSDecimalNumberBehaviors</a>
+</li>
+<li>
+<a href="#toc_5">系统提供默认</a>
+</li>
+<li>
+<a href="#toc_6">系统提供代理类 NSDecimalNumberHandler 处理</a>
+</li>
+</ul>
+</li>
+<li>
+<a href="#toc_7">数据转换</a>
+</li>
+<li>
+<a href="#toc_8">比较</a>
+</li>
+<li>
+<a href="#toc_9">异常常量</a>
+</li>
 </ul>
 
-<pre><code>    NSScanner *scanner = [NSScanner scannerWithString:@&quot;123&quot;];
-    int a;
-    
-    // 对扫描机需要扫描的字符，进行完整扫描识别，如果该字符串是 int，res 为 YES，a 的值有效，反之亦然；
-    BOOL res = [scanner scanInt:&amp;a];
-</code></pre>
 
 <blockquote>
-<p>类似的扫描 double、hex 略</p>
+<p>NSDecimalNumber : NSNumber</p>
 </blockquote>
 
-<ul>
-<li>部分扫描</li>
-</ul>
+<h3 id="toc_0">创建</h3>
 
-<pre><code>    // 扫描 指定字符串是前缀
-    NSString *c;
-    BOOL res1 = [scanner scanString:@&quot; DEF&quot; intoString:&amp;c];
+<pre><code>    NSDecimal decimal;
+    NSDecimalNumber *decimalNumber = [NSDecimalNumber decimalNumberWithDecimal:decimal];
+    NSDecimalNumber *decimalNumber1 = [NSDecimalNumber decimalNumberWithMantissa:12345 exponent:-4 isNegative:YES];
+    NSDecimalNumber *decimalNumber2 = [NSDecimalNumber decimalNumberWithString:@&quot;-1.2345&quot;];
+    NSDecimalNumber *decimalNumber3 = [NSDecimalNumber decimalNumberWithString:@&quot;-1.2345&quot; locale:nil];
+    // 对应的 实例化初始化，略；
     
-    
-    // 扫描 直到 指定字符集
-    NSString *d;
-    BOOL res2 = [scanner scanUpToCharactersFromSet:[NSCharacterSet decimalDigitCharacterSet] intoString:&amp;d];
+    // 默认值
+    NSLog(@&quot;zero:%@&quot;, [NSDecimalNumber zero]);
+    NSLog(@&quot;one:%@&quot;, [NSDecimalNumber one]);
+    NSLog(@&quot;minimumDecimalNumber:%@&quot;, [NSDecimalNumber minimumDecimalNumber]);
+    NSLog(@&quot;maximumDecimalNumber:%@&quot;, [NSDecimalNumber maximumDecimalNumber]);
+    NSLog(@&quot;notANumber:%@&quot;, [NSDecimalNumber notANumber]);
 </code></pre>
 
-<blockquote>
-<p>字符串与字符集，各举了一个例子</p>
-</blockquote>
+<h3 id="toc_1">计算</h3>
 
 <ul>
-<li>属性 isAtEnd</li>
+<li>decimalNumberA + decimalNumberB</li>
 </ul>
 
-<pre><code>    NSScanner *scanner = [NSScanner scannerWithString:@&quot;abc DEF 123 啊啊啊 0x22&quot;];
-    while (NO == [scanner isAtEnd]) {
-        int resInt;
-        BOOL res = [scanner scanInt:&amp;resInt];
-        NSLog(@&quot;%zi&quot;, resInt);
+<pre><code>    decimalNumber = [decimalNumber1 decimalNumberByAdding:decimalNumber2];
+    NSLog(@&quot;add:%@&quot;,decimalNumber);
+    
+    // 指定代理，舍入模式选择
+    decimalNumber = [decimalNumber1 decimalNumberByAdding:decimalNumber2 withBehavior:self];
+    NSLog(@&quot;add 2:%@&quot;,decimalNumber1);
+</code></pre>
+
+<ul>
+<li>decimalNumberA - decimalNumberB</li>
+</ul>
+
+<pre><code>    decimalNumber = [decimalNumber1 decimalNumberBySubtracting:decimalNumber2];
+    decimalNumber = [decimalNumber1 decimalNumberBySubtracting:decimalNumber2 withBehavior:self];
+</code></pre>
+
+<ul>
+<li>decimalNumberA * decimalNumberB</li>
+</ul>
+
+<pre><code>    decimalNumber = [decimalNumber1 decimalNumberByMultiplyingBy:decimalNumber2];
+    decimalNumber = [decimalNumber1 decimalNumberByMultiplyingBy:decimalNumber2 withBehavior:self];    
+</code></pre>
+
+<ul>
+<li>decimalNumberA / decimalNumberB</li>
+</ul>
+
+<pre><code>    decimalNumber = [decimalNumber1 decimalNumberByDividingBy:decimalNumber2];
+    decimalNumber = [decimalNumber1 decimalNumberByMultiplyingBy:decimalNumber2 withBehavior:self];
+</code></pre>
+
+<ul>
+<li>decimalNumberA ^ uintB</li>
+</ul>
+
+<pre><code>    decimalNumber = [decimalNumber1 decimalNumberByRaisingToPower:2];
+    decimalNumber = [decimalNumber1 decimalNumberByRaisingToPower:2 withBehavior:self];
+</code></pre>
+
+<ul>
+<li>decimalNumberA * 10 ^ shortB</li>
+</ul>
+
+<pre><code>    decimalNumber = [decimalNumber1 decimalNumberByMultiplyingByPowerOf10:2];
+    decimalNumber = [decimalNumber1 decimalNumberByMultiplyingByPowerOf10:2 withBehavior:self];
+</code></pre>
+
+<h3 id="toc_2">舍入方式</h3>
+
+<ul>
+<li>自身舍入</li>
+</ul>
+
+<pre><code>    decimalNumber = [decimalNumber decimalNumberByRoundingAccordingToBehavior:self];
+</code></pre>
+
+<ul>
+<li>计算舍入</li>
+</ul>
+
+<pre><code>    decimalNumber = [decimalNumber1 decimalNumberByAdding:decimalNumber2 withBehavior:self];
+</code></pre>
+
+<h3 id="toc_3">舍入处理</h3>
+
+<h4 id="toc_4">代理 NSDecimalNumberBehaviors</h4>
+
+<pre><code>{
+    decimalNumber = [decimalNumber decimalNumberByRoundingAccordingToBehavior:self];
+}
+
+#pragma mark - NSDecimalNumberBehaviors
+
+// 舍入方式
+- (NSRoundingMode)roundingMode {
+    return NSRoundBankers;
+}
+
+// 保留小数位数
+- (short)scale {
+    return 2;
+}
+
+// 舍入结果异常处理：
+- (nullable NSDecimalNumber *)exceptionDuringOperation:(SEL)operation error:(NSCalculationError)error leftOperand:(NSDecimalNumber *)leftOperand rightOperand:(nullable NSDecimalNumber *)rightOperand {
+    NSLog(@&quot;leftOperand:%@&quot;, leftOperand);
+    NSLog(@&quot;rightOperand:%@&quot;, rightOperand);
+    switch (error) {
+        case NSCalculationNoError: {
+            return rightOperand;
+        }
+            break;
+        case NSCalculationLossOfPrecision:{
+            return rightOperand;
+        }
+            break;
+        case NSCalculationUnderflow:{
+            return [NSDecimalNumber minimumDecimalNumber];
+        }
+            break;
+        case NSCalculationOverflow:{
+            return [NSDecimalNumber maximumDecimalNumber];
+        }
+            break;
+        case NSCalculationDivideByZero:{
+            return [NSDecimalNumber notANumber];
+        }
+            break;
     }
+}
+</code></pre>
+
+<h4 id="toc_5">系统提供默认</h4>
+
+<pre><code>    //[NSDecimalNumber defaultBehavior]
+    decimalNumber = [decimalNumber decimalNumberByRoundingAccordingToBehavior:[NSDecimalNumber defaultBehavior]];
+
+    //[NSDecimalNumberHandler defaultDecimalNumberHandler]
+    decimalNumber = [decimalNumber decimalNumberByRoundingAccordingToBehavior:[NSDecimalNumberHandler defaultDecimalNumberHandler]];
+</code></pre>
+
+<h4 id="toc_6">系统提供代理类 NSDecimalNumberHandler 处理</h4>
+
+<pre><code>    NSDecimalNumberHandler *handler = [NSDecimalNumberHandler decimalNumberHandlerWithRoundingMode:NSRoundBankers scale:2 raiseOnExactness:YES raiseOnOverflow:YES raiseOnUnderflow:YES raiseOnDivideByZero:YES];
+    decimalNumber = [decimalNumber decimalNumberByRoundingAccordingToBehavior:handler];
 </code></pre>
 
 <blockquote>
-<p>例子会导致无限循环，因为扫描机无法扫描到结尾，因为扫描指定的字符不是数字，在扫描 a，的时候就结束了</p>
+<p>注：使用代理类处理时 NSException 指定的几个参数为 YES 时，错误时会抛出异常，需要自己处理</p>
 </blockquote>
 
-<h3 id="toc_2">拓展 NSDecimalNumberScanning</h3>
+<pre><code>// 我们使用，除以 0 来做示例
+    @try {
+        decimalNumber = [decimalNumber decimalNumberByDividingBy:[NSDecimalNumber zero] withBehavior:handler];
 
-<blockquote>
-<p>与 扫描 int 哪些类似</p>
-</blockquote>
+    }
+    @catch (NSException *exception) {
+        if ([exception.name isEqualToString:NSDecimalNumberDivideByZeroException]) {
+            NSLog(@&quot;除数为 0！&quot;);
+        }
+    }
+    @finally {
+        // 结果处理
+        decimalNumber = [NSDecimalNumber decimalNumberWithString:@&quot;999&quot;];
+    }
+    NSLog(@&quot;%@&quot;,[decimalNumber descriptionWithLocale:nil]);
+</code></pre>
 
-<pre><code>    NSScanner *scanner = [NSScanner scannerWithString:@&quot;123.456&quot;];
+<h3 id="toc_7">数据转换</h3>
 
-    NSDecimal decimal;
-    BOOL res = [scanner scanDecimal:&amp;decimal];
-    NSDecimalNumber *decimalNum = [NSDecimalNumber decimalNumberWithDecimal:decimal];
+<pre><code>    NSDecimal decimalValue = decimalNumber1.decimalValue;
+    double doubleValue = decimalNumber1.doubleValue;
+    NSString *decimalString = [decimalNumber1 descriptionWithLocale:nil];
+    const char *decimalChar = decimalNumber1.objCType;
+</code></pre>
+
+<h3 id="toc_8">比较</h3>
+
+<pre><code>    NSComparisonResult *res = [num1 compare:num2];
+</code></pre>
+
+<h3 id="toc_9">异常常量</h3>
+
+<pre><code>FOUNDATION_EXPORT NSExceptionName const NSDecimalNumberExactnessException;    // 丢失精度
+FOUNDATION_EXPORT NSExceptionName const NSDecimalNumberOverflowException;     // 向上溢出
+FOUNDATION_EXPORT NSExceptionName const NSDecimalNumberUnderflowException;    // 向下溢出
+FOUNDATION_EXPORT NSExceptionName const NSDecimalNumberDivideByZeroException; // 除数为 0
 </code></pre>
 
 
-		</div>
-	
+</div>
 
- 
-	
+<br /><br />
+<hr />
 
- 
-	
+<div class="row clearfix">
+  <div class="large-6 columns">
+	<div class="text-left" style="padding:15px 0px;">
+		
+	        <a href="%E3%80%90iOS%20-%20Foundation%E3%80%91NSDecimal%20%E7%B2%BE%E7%A1%AE%E6%95%B0%E5%80%BC.html"  title="Previous Post: NSDecimal 精确数值">&laquo; NSDecimal 精确数值</a>
+	    
+	</div>
+  </div>
+  <div class="large-6 columns">
+	<div class="text-right" style="padding:15px 0px;">
+		
+	        <a href="%E3%80%90iOS%20-%20Foundation%E3%80%91NSURL.html" 
+	        title="Next Post: NSURL">NSURL &raquo;</a>
+	    
+	</div>
+  </div>
+</div>
 
- 
-	
+<div class="row">
+<div style="padding:0px 0.93em;" class="share-comments">
 
-  
-  
+</div>
+</div>
+<script type="text/javascript">
+	$(function(){
+		var currentURL = '%E3%80%90iOS%20-%20Foundation%E3%80%91NSDecimalNumber%20%E7%B2%BE%E7%A1%AE%E6%95%B0%E5%80%BC.html';
+		$('#side-nav a').each(function(){
+			if($(this).attr('href') == currentURL){
+				$(this).parent().addClass('active');
+			}
+		});
+	});
+</script>  
 </div></div>
 
 

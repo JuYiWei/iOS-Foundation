@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>
     
-  准备中 - 【iOS - Foundation】居然是村长
+  NSRange 范围 - 【iOS - Foundation】居然是村长
   
   </title>
  <meta name="description" content="">
@@ -199,121 +199,104 @@
             </div>
             <div class="large-9 medium-9 columns">
 
- 
-
-
-	
-		<div class="markdown-body">
-		<h1>NSScanner 字符串扫描机</h1>
-
-		<blockquote>
-<p>NSScanner : NSObject</p>
-</blockquote>
-
-<h3 id="toc_0">扫描机基本配置</h3>
-
-<pre><code>    // 初始化
-    NSScanner *scanner = [NSScanner scannerWithString:@&quot;abc DEF 123 啊啊啊 0x22&quot;];
-
-    // 字符
-    NSString *scannerString = scanner.string;
-    
-    // 开始位置
-    scanner.scanLocation = 2;
-    
-    // 过滤字符
-    scanner.charactersToBeSkipped = [NSCharacterSet lowercaseLetterCharacterSet];
-    
-    // 不忽略大小写，默认是 NO，忽略大小写的
-    scanner.caseSensitive = YES;
-    
-    // 本地化
-    scanner.locale = [[NSLocale alloc] initWithLocaleIdentifier: NSCalendarIdentifierGregorian];
-</code></pre>
-
-<blockquote>
-<p>注意过滤字符，与大小写的配置，会影响下面的扫描</p>
-</blockquote>
-
-<h3 id="toc_1">拓展 NSExtendedScanner</h3>
+ <div class="markdown-body">
+<h1>NSRange 范围</h1>
 
 <ul>
-<li>完整扫描</li>
+<li>
+<a href="#toc_0">初始化</a>
+</li>
+<li>
+<a href="#toc_1">操作</a>
+</li>
+<li>
+<a href="#toc_2">类型转换</a>
+</li>
 </ul>
 
-<pre><code>    NSScanner *scanner = [NSScanner scannerWithString:@&quot;123&quot;];
-    int a;
+
+<blockquote>
+<p>Foundation - NSRange</p>
+</blockquote>
+
+<h3 id="toc_0">初始化</h3>
+
+<pre><code>    NSRange range1 = NSMakeRange(2, 3);
+    NSRange range2 = {3, 4};
     
-    // 对扫描机需要扫描的字符，进行完整扫描识别，如果该字符串是 int，res 为 YES，a 的值有效，反之亦然；
-    BOOL res = [scanner scanInt:&amp;a];
+    NSString *str = @&quot;0123456789&quot;;
+    NSString *s1 = [str substringWithRange:range1];
+    NSString *s2 = [str substringWithRange:range2];
 </code></pre>
 
-<blockquote>
-<p>类似的扫描 double、hex 略</p>
-</blockquote>
+<h3 id="toc_1">操作</h3>
 
-<ul>
-<li>部分扫描</li>
-</ul>
-
-<pre><code>    // 扫描 指定字符串是前缀
-    NSString *c;
-    BOOL res1 = [scanner scanString:@&quot; DEF&quot; intoString:&amp;c];
+<pre><code>    // 最大位置
+    NSUInteger maxLocation = NSMaxRange(range1);
     
+    // 位置是否在内部
+    BOOL inRange = NSLocationInRange(3, range1);
     
-    // 扫描 直到 指定字符集
-    NSString *d;
-    BOOL res2 = [scanner scanUpToCharactersFromSet:[NSCharacterSet decimalDigitCharacterSet] intoString:&amp;d];
+    // 相等
+    BOOL eq = NSEqualRanges(range1, range2);
+    
+    // 并集
+    NSRange unionRange = NSUnionRange(range1, range2);
+    
+    // 交集
+    NSRange intersectionRange = NSIntersectionRange(range1, range2);
 </code></pre>
 
-<blockquote>
-<p>字符串与字符集，各举了一个例子</p>
-</blockquote>
+<h3 id="toc_2">类型转换</h3>
 
-<ul>
-<li>属性 isAtEnd</li>
-</ul>
-
-<pre><code>    NSScanner *scanner = [NSScanner scannerWithString:@&quot;abc DEF 123 啊啊啊 0x22&quot;];
-    while (NO == [scanner isAtEnd]) {
-        int resInt;
-        BOOL res = [scanner scanInt:&amp;resInt];
-        NSLog(@&quot;%zi&quot;, resInt);
-    }
-</code></pre>
-
-<blockquote>
-<p>例子会导致无限循环，因为扫描机无法扫描到结尾，因为扫描指定的字符不是数字，在扫描 a，的时候就结束了</p>
-</blockquote>
-
-<h3 id="toc_2">拓展 NSDecimalNumberScanning</h3>
-
-<blockquote>
-<p>与 扫描 int 哪些类似</p>
-</blockquote>
-
-<pre><code>    NSScanner *scanner = [NSScanner scannerWithString:@&quot;123.456&quot;];
-
-    NSDecimal decimal;
-    BOOL res = [scanner scanDecimal:&amp;decimal];
-    NSDecimalNumber *decimalNum = [NSDecimalNumber decimalNumberWithDecimal:decimal];
+<pre><code>    // 范围 &lt;-&gt; 字符
+    NSString *strFromRange = NSStringFromRange(range1);
+    NSRange range3 = NSRangeFromString(@&quot;{2, 3}&quot;);
+    
+    // 范围 &lt;-&gt; value
+    NSValue *value = [NSValue valueWithRange:NSMakeRange(2, 3)];
+    NSRange range4 = value.rangeValue;
 </code></pre>
 
 
-		</div>
-	
+</div>
 
- 
-	
+<br /><br />
+<hr />
 
- 
-	
+<div class="row clearfix">
+  <div class="large-6 columns">
+	<div class="text-left" style="padding:15px 0px;">
+		
+	        <a href="%E3%80%90iOS%20-%20Foundation%E3%80%91NSUUID%20%E9%80%9A%E7%94%A8%E5%94%AF%E4%B8%80%E8%AF%86%E5%88%AB%E7%A0%81.html"  title="Previous Post: NSUUID 通用唯一识别码">&laquo; NSUUID 通用唯一识别码</a>
+	    
+	</div>
+  </div>
+  <div class="large-6 columns">
+	<div class="text-right" style="padding:15px 0px;">
+		
+	        <a href="15217999591419.html" 
+	        title="Next Post: NSCharacterSet">NSCharacterSet &raquo;</a>
+	    
+	</div>
+  </div>
+</div>
 
- 
-	
+<div class="row">
+<div style="padding:0px 0.93em;" class="share-comments">
 
-  
-  
+</div>
+</div>
+<script type="text/javascript">
+	$(function(){
+		var currentURL = '%E3%80%90iOS%20-%20Foundation%E3%80%91NSRange%20%E8%8C%83%E5%9B%B4.html';
+		$('#side-nav a').each(function(){
+			if($(this).attr('href') == currentURL){
+				$(this).parent().addClass('active');
+			}
+		});
+	});
+</script>  
 </div></div>
 
 

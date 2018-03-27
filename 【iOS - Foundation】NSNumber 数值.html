@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>
     
-  准备中 - 【iOS - Foundation】居然是村长
+  NSNumber 数值 - 【iOS - Foundation】居然是村长
   
   </title>
  <meta name="description" content="">
@@ -199,121 +199,85 @@
             </div>
             <div class="large-9 medium-9 columns">
 
- 
-
-
-	
-		<div class="markdown-body">
-		<h1>NSScanner 字符串扫描机</h1>
-
-		<blockquote>
-<p>NSScanner : NSObject</p>
-</blockquote>
-
-<h3 id="toc_0">扫描机基本配置</h3>
-
-<pre><code>    // 初始化
-    NSScanner *scanner = [NSScanner scannerWithString:@&quot;abc DEF 123 啊啊啊 0x22&quot;];
-
-    // 字符
-    NSString *scannerString = scanner.string;
-    
-    // 开始位置
-    scanner.scanLocation = 2;
-    
-    // 过滤字符
-    scanner.charactersToBeSkipped = [NSCharacterSet lowercaseLetterCharacterSet];
-    
-    // 不忽略大小写，默认是 NO，忽略大小写的
-    scanner.caseSensitive = YES;
-    
-    // 本地化
-    scanner.locale = [[NSLocale alloc] initWithLocaleIdentifier: NSCalendarIdentifierGregorian];
-</code></pre>
-
-<blockquote>
-<p>注意过滤字符，与大小写的配置，会影响下面的扫描</p>
-</blockquote>
-
-<h3 id="toc_1">拓展 NSExtendedScanner</h3>
+ <div class="markdown-body">
+<h1>NSNumber 数值</h1>
 
 <ul>
-<li>完整扫描</li>
+<li>
+<a href="#toc_0">初始化</a>
+</li>
+<li>
+<a href="#toc_1">数据转换</a>
+</li>
+<li>
+<a href="#toc_2">比较</a>
+</li>
 </ul>
 
-<pre><code>    NSScanner *scanner = [NSScanner scannerWithString:@&quot;123&quot;];
-    int a;
-    
-    // 对扫描机需要扫描的字符，进行完整扫描识别，如果该字符串是 int，res 为 YES，a 的值有效，反之亦然；
-    BOOL res = [scanner scanInt:&amp;a];
+
+<blockquote>
+<p>NSNumber : NSValue</p>
+</blockquote>
+
+<h3 id="toc_0">初始化</h3>
+
+<pre><code>    NSNumber *integerNumber = [NSNumber numberWithInteger:123];
+    NSNumber *integerNumber2 = [[NSNumber alloc] initWithInteger:123];
+    NSNumber *allNumber = @(123.123);// 推荐，方便又简洁，自动识别原始数据类型
 </code></pre>
 
-<blockquote>
-<p>类似的扫描 double、hex 略</p>
-</blockquote>
+<h3 id="toc_1">数据转换</h3>
 
-<ul>
-<li>部分扫描</li>
-</ul>
-
-<pre><code>    // 扫描 指定字符串是前缀
-    NSString *c;
-    BOOL res1 = [scanner scanString:@&quot; DEF&quot; intoString:&amp;c];
-    
-    
-    // 扫描 直到 指定字符集
-    NSString *d;
-    BOOL res2 = [scanner scanUpToCharactersFromSet:[NSCharacterSet decimalDigitCharacterSet] intoString:&amp;d];
+<pre><code>    NSInteger integerValue = integerNumber.integerValue;// 其他基础数据类型转换略；
+    NSString *stringValue = integerNumber.stringValue;// 只有 number -&gt; string，没有 string -&gt; number
+    NSString *description = [integerNumber descriptionWithLocale:nil];
 </code></pre>
 
-<blockquote>
-<p>字符串与字符集，各举了一个例子</p>
-</blockquote>
+<h3 id="toc_2">比较</h3>
 
-<ul>
-<li>属性 isAtEnd</li>
-</ul>
-
-<pre><code>    NSScanner *scanner = [NSScanner scannerWithString:@&quot;abc DEF 123 啊啊啊 0x22&quot;];
-    while (NO == [scanner isAtEnd]) {
-        int resInt;
-        BOOL res = [scanner scanInt:&amp;resInt];
-        NSLog(@&quot;%zi&quot;, resInt);
-    }
-</code></pre>
-
-<blockquote>
-<p>例子会导致无限循环，因为扫描机无法扫描到结尾，因为扫描指定的字符不是数字，在扫描 a，的时候就结束了</p>
-</blockquote>
-
-<h3 id="toc_2">拓展 NSDecimalNumberScanning</h3>
-
-<blockquote>
-<p>与 扫描 int 哪些类似</p>
-</blockquote>
-
-<pre><code>    NSScanner *scanner = [NSScanner scannerWithString:@&quot;123.456&quot;];
-
-    NSDecimal decimal;
-    BOOL res = [scanner scanDecimal:&amp;decimal];
-    NSDecimalNumber *decimalNum = [NSDecimalNumber decimalNumberWithDecimal:decimal];
+<pre><code>    NSComparisonResult result = [integerNumber compare:integerNumber2];
+    BOOL isEqual = [integerNumber isEqualToNumber:integerNumber2];
 </code></pre>
 
 
-		</div>
-	
+</div>
 
- 
-	
+<br /><br />
+<hr />
 
- 
-	
+<div class="row clearfix">
+  <div class="large-6 columns">
+	<div class="text-left" style="padding:15px 0px;">
+		
+	        <a href="%E3%80%90iOS%20-%20Foundation%E3%80%91NSValue%20%E5%80%BC.html"  title="Previous Post: NSValue 值">&laquo; NSValue 值</a>
+	    
+	</div>
+  </div>
+  <div class="large-6 columns">
+	<div class="text-right" style="padding:15px 0px;">
+		
+	        <a href="%E3%80%90iOS%20-%20Foundation%E3%80%91NSDecimal%20%E7%B2%BE%E7%A1%AE%E6%95%B0%E5%80%BC.html" 
+	        title="Next Post: NSDecimal 精确数值">NSDecimal 精确数值 &raquo;</a>
+	    
+	</div>
+  </div>
+</div>
 
- 
-	
+<div class="row">
+<div style="padding:0px 0.93em;" class="share-comments">
 
-  
-  
+</div>
+</div>
+<script type="text/javascript">
+	$(function(){
+		var currentURL = '%E3%80%90iOS%20-%20Foundation%E3%80%91NSNumber%20%E6%95%B0%E5%80%BC.html';
+		$('#side-nav a').each(function(){
+			if($(this).attr('href') == currentURL){
+				$(this).parent().addClass('active');
+			}
+		});
+	});
+</script>  
 </div></div>
 
 

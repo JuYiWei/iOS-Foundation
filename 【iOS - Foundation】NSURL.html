@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>
     
-  准备中 - 【iOS - Foundation】居然是村长
+  NSURL - 【iOS - Foundation】居然是村长
   
   </title>
  <meta name="description" content="">
@@ -199,121 +199,268 @@
             </div>
             <div class="large-9 medium-9 columns">
 
- 
-
-
-	
-		<div class="markdown-body">
-		<h1>NSScanner 字符串扫描机</h1>
-
-		<blockquote>
-<p>NSScanner : NSObject</p>
-</blockquote>
-
-<h3 id="toc_0">扫描机基本配置</h3>
-
-<pre><code>    // 初始化
-    NSScanner *scanner = [NSScanner scannerWithString:@&quot;abc DEF 123 啊啊啊 0x22&quot;];
-
-    // 字符
-    NSString *scannerString = scanner.string;
-    
-    // 开始位置
-    scanner.scanLocation = 2;
-    
-    // 过滤字符
-    scanner.charactersToBeSkipped = [NSCharacterSet lowercaseLetterCharacterSet];
-    
-    // 不忽略大小写，默认是 NO，忽略大小写的
-    scanner.caseSensitive = YES;
-    
-    // 本地化
-    scanner.locale = [[NSLocale alloc] initWithLocaleIdentifier: NSCalendarIdentifierGregorian];
-</code></pre>
-
-<blockquote>
-<p>注意过滤字符，与大小写的配置，会影响下面的扫描</p>
-</blockquote>
-
-<h3 id="toc_1">拓展 NSExtendedScanner</h3>
+ <div class="markdown-body">
+<h1>NSURL</h1>
 
 <ul>
-<li>完整扫描</li>
+<li>
+<a href="#toc_0">创建</a>
+</li>
+<li>
+<a href="#toc_1">属性</a>
+</li>
+<li>
+<a href="#toc_2">资源操作</a>
+</li>
+<li>
+<a href="#toc_3">书签</a>
+</li>
+<li>
+<a href="#toc_4">常量</a>
+</li>
+<li>
+<a href="#toc_5">拓展 NSPromisedItems</a>
+</li>
+<li>
+<a href="#toc_6">拓展 NSURLPathUtilities</a>
+</li>
 </ul>
 
-<pre><code>    NSScanner *scanner = [NSScanner scannerWithString:@&quot;123&quot;];
-    int a;
+
+<blockquote>
+<p>NSURL : NSObject</p>
+</blockquote>
+
+<h3 id="toc_0">创建</h3>
+
+<pre><code>    // 通用 URL string 创建
+    NSURL *baseUrl = [NSURL URLWithString:@&quot;http://www.test.com&quot;];
+    NSURL *url1 = [NSURL URLWithString:@&quot;test.php?name=Li Lei&quot; relativeToURL:baseUrl];
     
-    // 对扫描机需要扫描的字符，进行完整扫描识别，如果该字符串是 int，res 为 YES，a 的值有效，反之亦然；
-    BOOL res = [scanner scanInt:&amp;a];
+    // 文件 path 创建，还有几个少参数的略了，路径、文件夹、baseUrl
+    NSString *path = [[NSBundle mainBundle] pathForResource:@&quot;test&quot; ofType:@&quot;txt&quot;];
+    NSURL *url2 = [NSURL fileURLWithPath:path isDirectory:YES relativeToURL:nil];
+    
+    // cPath 创建
+    const char *cPath = [path cStringUsingEncoding:NSUTF8StringEncoding];
+    NSURL *url3 = [NSURL fileURLWithFileSystemRepresentation:cPath isDirectory:NO relativeToURL:nil];
+
+    // dataURL 创建
+    NSData *dataURL = [[NSString stringWithFormat:@&quot;file://%@&quot;,path] dataUsingEncoding:NSUTF8StringEncoding];
+    NSURL *url4 = [NSURL URLWithDataRepresentation:dataURL relativeToURL:nil];
+    
+    // 绝对 URL，暂时不知与上一个的区别在哪里
+    NSURL *url5 = [NSURL absoluteURLWithDataRepresentation:dataURL relativeToURL:nil];
 </code></pre>
 
 <blockquote>
-<p>类似的扫描 double、hex 略</p>
+<p>只举例类方法，实例方法一样就略了<br/>
+注意 Path 与 URL 的区别（path 不带 传输协议）</p>
 </blockquote>
+
+<h3 id="toc_1">属性</h3>
 
 <ul>
-<li>部分扫描</li>
+<li>不使用 baseURL，绝对路径</li>
 </ul>
 
-<pre><code>    // 扫描 指定字符串是前缀
-    NSString *c;
-    BOOL res1 = [scanner scanString:@&quot; DEF&quot; intoString:&amp;c];
-    
-    
-    // 扫描 直到 指定字符集
-    NSString *d;
-    BOOL res2 = [scanner scanUpToCharactersFromSet:[NSCharacterSet decimalDigitCharacterSet] intoString:&amp;d];
-</code></pre>
+<pre><code>    NSURL *url = [NSURL URLWithString:@&quot;http://www.test.com?a=1&amp;b=2#123&quot;];
 
-<blockquote>
-<p>字符串与字符集，各举了一个例子</p>
-</blockquote>
+    NSData *dataRepresentation = url.dataRepresentation;// dataURL（withString：处的data）
+    const char *fileSystemRepresentation = url.fileSystemRepresentation;
+
+    NSString *absoluteString = url.absoluteString;// http://www.test.com?a=1&amp;b=2#123
+    NSString *relativeString = url.relativeString;// http://www.test.com?a=1&amp;b=2#123
+    NSURL *baseURL = url.baseURL;// nil
+    NSURL *absoluteURL = url.absoluteURL;// http://www.test.com?a=1&amp;b=2#123
+    
+    NSString *scheme = url.scheme;// http
+    NSString *resourceSpecifier = url.resourceSpecifier;// //www.test.com?a=1&amp;b=2#123
+    
+    NSString *host = url.host;// www.test.com
+    NSNumber *port = url.port;// nil
+    NSString *user = url.user;// nil
+    NSString *password = url.password;// nil
+    NSString *path = url.path;// nil
+    NSString *fragment = url.fragment;// 123
+    NSString *parameterString = url.parameterString;// nil
+    NSString *query = url.query;// a=1&amp;b=2
+    NSString *relativePath = url.relativePath;// &quot;&quot;
+    BOOL hasDirectoryPath = url.hasDirectoryPath;// NO
+    BOOL isFileURL = url.isFileURL;// NO
+
+    NSURL *standardizedURL = url.standardizedURL;// http://www.test.com?a=1&amp;b=2#123
+    NSURL *filePathURL = url.filePathURL;// nil
+</code></pre>
 
 <ul>
-<li>属性 isAtEnd</li>
+<li>使用 baseURL，相对路径</li>
 </ul>
 
-<pre><code>    NSScanner *scanner = [NSScanner scannerWithString:@&quot;abc DEF 123 啊啊啊 0x22&quot;];
-    while (NO == [scanner isAtEnd]) {
-        int resInt;
-        BOOL res = [scanner scanInt:&amp;resInt];
-        NSLog(@&quot;%zi&quot;, resInt);
-    }
+<pre><code>    NSURL *baseUrl = [NSURL URLWithString:@&quot;http://www.test.com&quot;];
+    NSURL *url = [NSURL URLWithString:@&quot;?a=1&amp;b=2#123&quot; relativeToURL:baseUrl];
+    
+    NSData *dataRepresentation = url.dataRepresentation;// dataURL（withString：处的data）
+    const char *fileSystemRepresentation = url.fileSystemRepresentation;
+
+    NSString *absoluteString = url.absoluteString;// http://www.test.com?a=1&amp;b=2#123
+    NSString *relativeString = url.relativeString;// ?a=1&amp;b=2#123
+    NSURL *absoluteURL = url.absoluteURL;// http://www.test.com?a=1&amp;b=2#123
+    
+    NSString *scheme = url.scheme;// http
+    NSString *resourceSpecifier = url.resourceSpecifier;// //www.test.com?a=1&amp;b=2#123
+    
+    NSString *host = url.host;// www.test.com
+    NSNumber *port = url.port;// nil
+    NSString *user = url.user;// nil
+    NSString *password = url.password;// nil
+    NSString *path = url.path;// &quot;&quot;
+    NSString *fragment = url.fragment;// 123
+    NSString *parameterString = url.parameterString;// nil
+    NSString *query = url.query;// a=1&amp;b=2
+    NSString *relativePath = url.relativePath;// path
+    BOOL hasDirectoryPath = url.hasDirectoryPath;// NO
+    BOOL isFileURL = url.isFileURL;// NO
+
+    NSURL *standardizedURL = url.standardizedURL;// ?a=1&amp;b=2#123 -- http://www.test.com
+    NSURL *filePathURL = url.filePathURL;// nil
+
+</code></pre>
+
+<h3 id="toc_2">资源操作</h3>
+
+<pre><code>    id resdata;
+    BOOL res2 = [url getResourceValue:&amp;resdata forKey:NSURLNameKey error:nil];
+    NSDictionary *dic = [url resourceValuesForKeys:@[NSURLNameKey] error:nil];
+    
+    BOOL res3 = [url setResourceValue:@&quot;v&quot; forKey:NSURLNameKey error:nil];
+    BOOL res4 = [url setResourceValues:@{NSURLNameKey:@&quot;v2&quot;} error:nil];
+    
+    [url removeCachedResourceValueForKey:NSURLNameKey];
+    [url removeAllCachedResourceValues];
+    [url setTemporaryResourceValue:@&quot;vv&quot; forKey:NSURLNameKey];
 </code></pre>
 
 <blockquote>
-<p>例子会导致无限循环，因为扫描机无法扫描到结尾，因为扫描指定的字符不是数字，在扫描 a，的时候就结束了</p>
+<p>并不是很会用，唉；</p>
 </blockquote>
 
-<h3 id="toc_2">拓展 NSDecimalNumberScanning</h3>
+<pre><code>FOUNDATION_EXPORT NSURLResourceKey const NSURLKeysOfUnsetValuesKey;// 未定义的 key
+其他定义了非常多的 NSURLResourceKey，此处略了；
+</code></pre>
+
+<pre><code>NSURLFileResourceType   类型枚举
+NSURLThumbnailDictionaryItem 缩略图？
+NSURLFileProtectionType 保护机制枚举
+NSURLUbiquitousItemDownloadingStatus    下载状态枚举
+NSURLUbiquitousSharedItemRole   分享规则？
+NSURLUbiquitousSharedItemPermissions 分享读写属性？
+
+NSURLBookmarkCreationOptions    书签
+NSURLBookmarkResolutionOptions 书签读取规则？
+</code></pre>
+
+<h3 id="toc_3">书签</h3>
 
 <blockquote>
-<p>与 扫描 int 哪些类似</p>
+<p>瞬间爆炸，看的头疼，放以下 API 自我安慰。</p>
 </blockquote>
 
-<pre><code>    NSScanner *scanner = [NSScanner scannerWithString:@&quot;123.456&quot;];
+<pre><code>- (nullable NSData *)bookmarkDataWithOptions:(NSURLBookmarkCreationOptions)options includingResourceValuesForKeys:(nullable NSArray&lt;NSURLResourceKey&gt; *)keys relativeToURL:(nullable NSURL *)relativeURL error:(NSError **)error;
 
-    NSDecimal decimal;
-    BOOL res = [scanner scanDecimal:&amp;decimal];
-    NSDecimalNumber *decimalNum = [NSDecimalNumber decimalNumberWithDecimal:decimal];
+- (nullable instancetype)initByResolvingBookmarkData:(NSData *)bookmarkData options:(NSURLBookmarkResolutionOptions)options relativeToURL:(nullable NSURL *)relativeURL bookmarkDataIsStale:(BOOL * _Nullable)isStale error:(NSError **)error; 
+
++ (nullable instancetype)URLByResolvingBookmarkData:(NSData *)bookmarkData options:(NSURLBookmarkResolutionOptions)options relativeToURL:(nullable NSURL *)relativeURL bookmarkDataIsStale:(BOOL * _Nullable)isStale error:(NSError **)error; 
+
++ (nullable NSDictionary&lt;NSURLResourceKey, id&gt; *)resourceValuesForKeys:(NSArray&lt;NSURLResourceKey&gt; *)keys fromBookmarkData:(NSData *)bookmarkData;
+
++ (BOOL)writeBookmarkData:(NSData *)bookmarkData toURL:(NSURL *)bookmarkFileURL options:(NSURLBookmarkFileCreationOptions)options error:(NSError **)error;
+
++ (nullable NSData *)bookmarkDataWithContentsOfURL:(NSURL *)bookmarkFileURL error:(NSError **)error;
+
++ (nullable instancetype)URLByResolvingAliasFileAtURL:(NSURL *)url options:(NSURLBookmarkResolutionOptions)options error:(NSError **)error;
+
+- (BOOL)startAccessingSecurityScopedResource;
+
+- (void)stopAccessingSecurityScopedResource;
+</code></pre>
+
+<h3 id="toc_4">常量</h3>
+
+<pre><code>FOUNDATION_EXPORT NSString *NSURLFileScheme;// file
+</code></pre>
+
+<h3 id="toc_5">拓展 NSPromisedItems</h3>
+
+<pre><code>- (BOOL)getPromisedItemResourceValue:(id _Nullable * _Nonnull)value forKey:(NSURLResourceKey)key error:(NSError **)error;
+
+- (nullable NSDictionary&lt;NSURLResourceKey, id&gt; *)promisedItemResourceValuesForKeys:(NSArray&lt;NSURLResourceKey&gt; *)keys error:(NSError **)error;
+
+- (BOOL)checkPromisedItemIsReachableAndReturnError:(NSError **)error;
+</code></pre>
+
+<h3 id="toc_6">拓展 NSURLPathUtilities</h3>
+
+<blockquote>
+<p>文件专用拓展</p>
+</blockquote>
+
+<pre><code>    NSArray *arr = @[@&quot;aa&quot;, @&quot;nn&quot;, @&quot;test.txt&quot;];
+    
+    NSURL *url = [NSURL fileURLWithPathComponents:arr];
+    
+    NSArray *arr2 = url.pathComponents;// 组件数组
+    NSString *las = url.lastPathComponent;// test.txt
+    NSString *pae = url.pathExtension;// txt
+    
+    NSURL *u = url.URLByDeletingLastPathComponent;// 删除最后一个组件
+    NSURL *u2 = url.URLByDeletingPathExtension;// 删除文件后缀
+    NSURL *u3 = url.URLByStandardizingPath;// 格式化？ file:///aa/nn/test.txt
+    NSURL *u4 = url.URLByResolvingSymlinksInPath;// 格式化？ file:///aa/nn/test.txt
+
+    [url URLByAppendingPathComponent:@&quot;111&quot; isDirectory:YES];// 添加组件
+    [url URLByAppendingPathExtension:@&quot;222&quot;];// 添加文件后缀
 </code></pre>
 
 
-		</div>
-	
+</div>
 
- 
-	
+<br /><br />
+<hr />
 
- 
-	
+<div class="row clearfix">
+  <div class="large-6 columns">
+	<div class="text-left" style="padding:15px 0px;">
+		
+	        <a href="%E3%80%90iOS%20-%20Foundation%E3%80%91NSDecimalNumber%20%E7%B2%BE%E7%A1%AE%E6%95%B0%E5%80%BC.html"  title="Previous Post: NSDecimalNumber 精确数值">&laquo; NSDecimalNumber 精确数值</a>
+	    
+	</div>
+  </div>
+  <div class="large-6 columns">
+	<div class="text-right" style="padding:15px 0px;">
+		
+	        <a href="%E3%80%90iOS%20-%20Foundation%E3%80%91NSNumberFormatter%20%E6%95%B0%E5%80%BC%E6%A0%BC%E5%BC%8F%E5%8C%96.html" 
+	        title="Next Post: NSNumberFormatter 数值格式化">NSNumberFormatter 数值格式化 &raquo;</a>
+	    
+	</div>
+  </div>
+</div>
 
- 
-	
+<div class="row">
+<div style="padding:0px 0.93em;" class="share-comments">
 
-  
-  
+</div>
+</div>
+<script type="text/javascript">
+	$(function(){
+		var currentURL = '%E3%80%90iOS%20-%20Foundation%E3%80%91NSURL.html';
+		$('#side-nav a').each(function(){
+			if($(this).attr('href') == currentURL){
+				$(this).parent().addClass('active');
+			}
+		});
+	});
+</script>  
 </div></div>
 
 

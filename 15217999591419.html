@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>
     
-  准备中 - 【iOS - Foundation】居然是村长
+  NSCharacterSet - 【iOS - Foundation】居然是村长
   
   </title>
  <meta name="description" content="">
@@ -199,121 +199,74 @@
             </div>
             <div class="large-9 medium-9 columns">
 
- 
+ <div class="markdown-body">
+<h1>NSCharacterSet</h1>
 
+<h3 id="toc_0">拓展 NSURLUtilities</h3>
 
-	
-		<div class="markdown-body">
-		<h1>NSScanner 字符串扫描机</h1>
+<pre><code>@interface NSCharacterSet (NSURLUtilities)
+// Predefined character sets for the six URL components and subcomponents which allow percent encoding. These character sets are passed to -stringByAddingPercentEncodingWithAllowedCharacters:.
 
-		<blockquote>
-<p>NSScanner : NSObject</p>
-</blockquote>
+// Returns a character set containing the characters allowed in an URL&#39;s user subcomponent.
+@property (class, readonly, copy) NSCharacterSet *URLUserAllowedCharacterSet API_AVAILABLE(macos(10.9), ios(7.0), watchos(2.0), tvos(9.0));
 
-<h3 id="toc_0">扫描机基本配置</h3>
+// Returns a character set containing the characters allowed in an URL&#39;s password subcomponent.
+@property (class, readonly, copy) NSCharacterSet *URLPasswordAllowedCharacterSet API_AVAILABLE(macos(10.9), ios(7.0), watchos(2.0), tvos(9.0));
 
-<pre><code>    // 初始化
-    NSScanner *scanner = [NSScanner scannerWithString:@&quot;abc DEF 123 啊啊啊 0x22&quot;];
+// Returns a character set containing the characters allowed in an URL&#39;s host subcomponent.
+@property (class, readonly, copy) NSCharacterSet *URLHostAllowedCharacterSet API_AVAILABLE(macos(10.9), ios(7.0), watchos(2.0), tvos(9.0));
 
-    // 字符
-    NSString *scannerString = scanner.string;
-    
-    // 开始位置
-    scanner.scanLocation = 2;
-    
-    // 过滤字符
-    scanner.charactersToBeSkipped = [NSCharacterSet lowercaseLetterCharacterSet];
-    
-    // 不忽略大小写，默认是 NO，忽略大小写的
-    scanner.caseSensitive = YES;
-    
-    // 本地化
-    scanner.locale = [[NSLocale alloc] initWithLocaleIdentifier: NSCalendarIdentifierGregorian];
-</code></pre>
+// Returns a character set containing the characters allowed in an URL&#39;s path component. &#39;;&#39; is a legal path character, but it is recommended that it be percent-encoded for best compatibility with NSURL (-stringByAddingPercentEncodingWithAllowedCharacters: will percent-encode any &#39;;&#39; characters if you pass the URLPathAllowedCharacterSet).
+@property (class, readonly, copy) NSCharacterSet *URLPathAllowedCharacterSet API_AVAILABLE(macos(10.9), ios(7.0), watchos(2.0), tvos(9.0));
 
-<blockquote>
-<p>注意过滤字符，与大小写的配置，会影响下面的扫描</p>
-</blockquote>
+// Returns a character set containing the characters allowed in an URL&#39;s query component.
+@property (class, readonly, copy) NSCharacterSet *URLQueryAllowedCharacterSet API_AVAILABLE(macos(10.9), ios(7.0), watchos(2.0), tvos(9.0));
 
-<h3 id="toc_1">拓展 NSExtendedScanner</h3>
+// Returns a character set containing the characters allowed in an URL&#39;s fragment component.
+@property (class, readonly, copy) NSCharacterSet *URLFragmentAllowedCharacterSet API_AVAILABLE(macos(10.9), ios(7.0), watchos(2.0), tvos(9.0));
 
-<ul>
-<li>完整扫描</li>
-</ul>
-
-<pre><code>    NSScanner *scanner = [NSScanner scannerWithString:@&quot;123&quot;];
-    int a;
-    
-    // 对扫描机需要扫描的字符，进行完整扫描识别，如果该字符串是 int，res 为 YES，a 的值有效，反之亦然；
-    BOOL res = [scanner scanInt:&amp;a];
-</code></pre>
-
-<blockquote>
-<p>类似的扫描 double、hex 略</p>
-</blockquote>
-
-<ul>
-<li>部分扫描</li>
-</ul>
-
-<pre><code>    // 扫描 指定字符串是前缀
-    NSString *c;
-    BOOL res1 = [scanner scanString:@&quot; DEF&quot; intoString:&amp;c];
-    
-    
-    // 扫描 直到 指定字符集
-    NSString *d;
-    BOOL res2 = [scanner scanUpToCharactersFromSet:[NSCharacterSet decimalDigitCharacterSet] intoString:&amp;d];
-</code></pre>
-
-<blockquote>
-<p>字符串与字符集，各举了一个例子</p>
-</blockquote>
-
-<ul>
-<li>属性 isAtEnd</li>
-</ul>
-
-<pre><code>    NSScanner *scanner = [NSScanner scannerWithString:@&quot;abc DEF 123 啊啊啊 0x22&quot;];
-    while (NO == [scanner isAtEnd]) {
-        int resInt;
-        BOOL res = [scanner scanInt:&amp;resInt];
-        NSLog(@&quot;%zi&quot;, resInt);
-    }
-</code></pre>
-
-<blockquote>
-<p>例子会导致无限循环，因为扫描机无法扫描到结尾，因为扫描指定的字符不是数字，在扫描 a，的时候就结束了</p>
-</blockquote>
-
-<h3 id="toc_2">拓展 NSDecimalNumberScanning</h3>
-
-<blockquote>
-<p>与 扫描 int 哪些类似</p>
-</blockquote>
-
-<pre><code>    NSScanner *scanner = [NSScanner scannerWithString:@&quot;123.456&quot;];
-
-    NSDecimal decimal;
-    BOOL res = [scanner scanDecimal:&amp;decimal];
-    NSDecimalNumber *decimalNum = [NSDecimalNumber decimalNumberWithDecimal:decimal];
+@end
 </code></pre>
 
 
-		</div>
-	
+</div>
 
- 
-	
+<br /><br />
+<hr />
 
- 
-	
+<div class="row clearfix">
+  <div class="large-6 columns">
+	<div class="text-left" style="padding:15px 0px;">
+		
+	        <a href="%E3%80%90iOS%20-%20Foundation%E3%80%91NSRange%20%E8%8C%83%E5%9B%B4.html"  title="Previous Post: NSRange 范围">&laquo; NSRange 范围</a>
+	    
+	</div>
+  </div>
+  <div class="large-6 columns">
+	<div class="text-right" style="padding:15px 0px;">
+		
+	        <a href="15138436818502.html" 
+	        title="Next Post: NSString">NSString &raquo;</a>
+	    
+	</div>
+  </div>
+</div>
 
- 
-	
+<div class="row">
+<div style="padding:0px 0.93em;" class="share-comments">
 
-  
-  
+</div>
+</div>
+<script type="text/javascript">
+	$(function(){
+		var currentURL = '15217999591419.html';
+		$('#side-nav a').each(function(){
+			if($(this).attr('href') == currentURL){
+				$(this).parent().addClass('active');
+			}
+		});
+	});
+</script>  
 </div></div>
 
 
